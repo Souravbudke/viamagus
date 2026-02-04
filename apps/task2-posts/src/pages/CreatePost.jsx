@@ -10,6 +10,7 @@ const CreatePost = () => {
     });
     const [error, setError] = useState('');
     const [submitting, setSubmitting] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,8 +50,8 @@ const CreatePost = () => {
             });
 
             if (response.ok) {
-                alert('Post created successfully!');
-                navigate('/');
+                // Show Success Modal instead of alert
+                setSuccess(true);
             } else {
                 throw new Error('Failed to create post');
             }
@@ -62,10 +63,15 @@ const CreatePost = () => {
         }
     };
 
+    const handleSuccessClose = () => {
+        setSuccess(false);
+        navigate('/');
+    };
+
     return (
         <div className={styles.container}>
-            <Link to="/" className={styles.backLink}>&larr; Back to List</Link>
-            <h1>Create New Post</h1>
+            <Link to="/" className={styles.backLink}>&lt; RETURN_TO_ARCHIVE</Link>
+            <h1 className={styles.headerTitle}>NEW_ENTRY_TERMINAL</h1>
 
             {error && <div className={styles.error}>{error}</div>}
 
@@ -99,9 +105,20 @@ const CreatePost = () => {
                 </div>
 
                 <button type="submit" className={styles.submitBtn} disabled={submitting}>
-                    {submitting ? 'Submitting...' : 'Submit Post'}
+                    {submitting ? 'TRANSMITTING...' : 'INITIATE_UPLOAD'}
                 </button>
             </form>
+
+            {success && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalContent}>
+                        <h2 className={styles.modalTitle}>TRANSMISSION<br />SUCCESSFUL</h2>
+                        <button onClick={handleSuccessClose} className={styles.modalBtn}>
+                            [ RETURN_TO_ARCHIVE ]
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

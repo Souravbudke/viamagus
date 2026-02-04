@@ -1,0 +1,76 @@
+.container {
+    padding-top: var(--spacing-2);
+    /* Mimic padding-top of .post in PostDetail */
+    animation: pulse 1.5s infinite;
+}
+
+.titleBlock {
+    background: #000;
+    height: 4rem;
+    /* font-size of 4rem */
+    width: 60%;
+    margin-bottom: var(--spacing-4);
+    /* match title border-bottom */
+}
+
+.metaStrip {
+    border-top: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+    height: 38px;
+    /* Calculated height: 1.5 lineHeight * 16px font + padding */
+    padding: var(--spacing-2) 0;
+    box-sizing: content-box;
+    /* Ensure padding adds to height like real element */
+    margin-bottom: var(--spacing-4);
+    opacity: 0.3;
+    background: linear-gradient(90deg, transparent 50%, #000 50%);
+    background-size: 20px 100%;
+}
+
+.bodyBlock {
+    background: #000;
+    height: 1.2rem;
+    width: 100%;
+    max-width: 65ch;
+    margin: 0 auto 1.5rem auto;
+    /* Match line-height spacing roughly */
+    opacity: 0.1;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}
+
+@media (max-width: 480px) {
+    .titleBlock {
+        height: 2rem;
+        /* Match mobile font size roughly */
+        width: 100%;
+    }
+
+    .metaStrip {
+        height: auto;
+        min-height: 40px;
+        background: #000;
+        opacity: 0.1;
+    }
+
+    .bodyBlock {
+        margin-left: 0;
+        margin-right: 0;
+        /* Left align on mobile */
+        max-width: 100%;
+        height: 1rem;
+        margin-bottom: 0.8rem;
+    }
+}

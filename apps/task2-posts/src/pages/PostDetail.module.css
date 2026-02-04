@@ -1,46 +1,83 @@
 .container {
-    max-width: 800px;
+    max-width: var(--container-width);
     margin: 0 auto;
-    padding: 40px 20px;
-    font-family: 'Segoe UI', sans-serif;
+    padding: var(--spacing-4);
+    border-left: var(--border-width) solid var(--color-border);
+    border-right: var(--border-width) solid var(--color-border);
+    min-height: 100vh;
 }
 
 .backLink {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
     display: inline-block;
-    margin-bottom: 30px;
+    margin-bottom: var(--spacing-4);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: var(--border-width) solid transparent;
+}
+
+.backLink:hover {
+    border-bottom-color: var(--color-text);
 }
 
 .post {
-    background: white;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding-top: var(--spacing-2);
 }
 
 .title {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    color: #222;
-    text-transform: capitalize;
+    font-size: 4rem;
+    line-height: 0.9;
+    margin-bottom: var(--spacing-4);
+    color: var(--color-text);
+    text-transform: uppercase;
+    word-break: break-word;
 }
 
-.meta {
-    color: #888;
+.metaContainer {
+    border-top: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+    padding: var(--spacing-2) 0;
+    margin-bottom: var(--spacing-4);
+    font-family: var(--font-mono);
     font-size: 0.9rem;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.divider {
-    border: 0;
-    border-top: 1px solid #eee;
-    margin: 20px 0;
+.metaItem {
+    text-transform: uppercase;
 }
 
 .body {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: #444;
+    font-family: var(--font-body);
+    /* Using the mono body font for consistency or could switch to serif for editorial feel */
+    font-size: 1.25rem;
+    /* Larger for readability */
+    line-height: 1.6;
+    max-width: 65ch;
+    /* Optimal reading width */
+    margin: 0 auto;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .container {
+        border: none;
+        padding: var(--spacing-2);
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .metaContainer {
+        flex-direction: column;
+        gap: var(--spacing-1);
+    }
+}
+@media (max-width: 480px) {
+    .title { font-size: 2rem; line-height: 1.1; }
+    .body { font-size: 1rem; text-align: left; /* Easier to read on mobile */ margin-left: 0; margin-right: 0; }
+    .backLink { font-size: 0.9rem; }
 }

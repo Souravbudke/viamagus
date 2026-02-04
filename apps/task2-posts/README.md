@@ -1,16 +1,33 @@
-# React + Vite
+# Task 2: Posts App (Typographic Brutalism Edition)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application for viewing and creating posts, designed with a high-impact "Typographic Brutalist" aesthetic.
 
-Currently, two official plugins are available:
+## Features
+- **View Posts**: Paginated list of posts from JSONPlaceholder.
+- **Read Details**: Deep link into specific post details.
+- **Create Post**: Form to submit new entries.
+- **Bonus**:
+  - **Caching**: Instant navigation for previously visited pages.
+  - **Skeletons**: Custom loading states.
+  - **Mobile Optimized**: Responsive design for all screens.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 How to Run
 
-## React Compiler
+1.  **Install Dependencies**:
+    ```bash
+    npm install
+    ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2.  **Start Dev Server**:
+    ```bash
+    npm run dev
+    ```
 
-## Expanding the ESLint configuration
+3.  **Open App**:
+    Visit `http://localhost:5173`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+- React
+- React Router DOM
+- Context API (State & Caching)
+- CSS Modules (No frameworks, pure CSS)
