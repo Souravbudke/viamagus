@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Cart.module.css';
 
-const INITIAL_PRODUCTS = [
+const productList = [
     {
         id: 1,
         name: 'Product A',
@@ -17,9 +17,18 @@ const INITIAL_PRODUCTS = [
 ];
 
 const Cart = () => {
-    const [cartItems, setCartItems] = useState(INITIAL_PRODUCTS);
+    // Initialize from localStorage if available, else use productList
+    const [cartItems, setCartItems] = useState(() => {
+        const savedCart = localStorage.getItem('cartItems');
+        return savedCart ? JSON.parse(savedCart) : productList;
+    });
     const [discount, setDiscount] = useState('');
     const [discountApplied, setDiscountApplied] = useState(0);
+
+    // Save to localStorage whenever cartItems changes
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }, [cartItems]);
 
     const handleQuantityChange = (id, newQty) => {
         // Ensure quantity is positive integer
@@ -31,6 +40,10 @@ const Cart = () => {
                 item.id === id ? { ...item, quantity: qty } : item
             )
         );
+    };
+
+    const handleRemoveItem = (id) => {
+        setCartItems(items => items.filter(item => item.id !== id));
     };
 
     const calculateSubtotal = () => {
@@ -66,9 +79,24 @@ const Cart = () => {
         }).format(amount);
     };
 
+    const handleAddProduct = () => {
+        const missingProducts = productList.filter(p => !cartItems.some(item => item.id === p.id));
+        if (missingProducts.length > 0) {
+            const productToAdd = missingProducts[0];
+            setCartItems([...cartItems, productToAdd]);
+        } else {
+            alert("All products are already in the cart.");
+        }
+    };
+
     return (
         <div className={styles.container}>
-            <h1 className={styles.header}>Shopping Cart</h1>
+            <header className={styles.headerRow}>
+                <h1 className={styles.header}>Shopping Cart</h1>
+                <button onClick={handleAddProduct} className={styles.addBtn} disabled={cartItems.length === productList.length}>
+                    + Add Product
+                </button>
+            </header>
 
             <div className={styles.cartList}>
                 <div className={styles.listHeader}>
@@ -76,6 +104,7 @@ const Cart = () => {
                     <div className={styles.colPrice}>Price</div>
                     <div className={styles.colQty}>Quantity</div>
                     <div className={styles.colTotal}>Total</div>
+                    <div className={styles.colAction}></div>
                 </div>
 
                 {cartItems.map(item => (
@@ -92,6 +121,9 @@ const Cart = () => {
                             />
                         </div>
                         <div className={styles.colTotal}>{formatCurrency(item.price * item.quantity)}</div>
+                        <div className={styles.colAction}>
+                            <button onClick={() => handleRemoveItem(item.id)} className={styles.removeBtn}>Remove</button>
+                        </div>
                     </div>
                 ))}
             </div>
