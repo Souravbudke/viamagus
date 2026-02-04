@@ -390,9 +390,21 @@
     }
 
     .totals {
-        padding: 24px;
+        padding: 20px;
+        /* Slightly reduced padding for mobile */
         background: var(--surface);
         border-radius: var(--radius-md);
         border: 1px solid var(--border);
+        min-width: auto;
+        /* Allow full shrinkage */
+        width: 100%;
+        /* Take available space */
+        box-sizing: border-box;
+        /* Ensure padding doesn't add to width */
+    }
+
+    .discountSection {
+        min-width: auto;
+        width: 100%;
     }
 }
