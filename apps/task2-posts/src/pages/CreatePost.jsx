@@ -114,7 +114,8 @@ const CreatePost = () => {
                     <div className={styles.modalContent}>
                         <h2 className={styles.modalTitle}>TRANSMISSION<br />SUCCESSFUL</h2>
                         <button onClick={handleSuccessClose} className={styles.modalBtn}>
-                            [ RETURN_TO_ARCHIVE ]
+                            <span className={styles.desktopText}>[ RETURN_TO_ARCHIVE ]</span>
+                            <span className={styles.mobileText}>[ continue ]</span>
                         </button>
                     </div>
                 </div>

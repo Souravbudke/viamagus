@@ -139,6 +139,16 @@
 
     .modalBtn {
         font-size: 1rem;
+        white-space: nowrap;
+        /* Prevent wrapping */
+    }
+
+    .desktopText {
+        display: none;
+    }
+
+    .mobileText {
+        display: inline;
     }
 }
 
