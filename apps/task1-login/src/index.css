@@ -1,0 +1,27 @@
+:root {
+  --primary-color: #20B716;
+  --text-color: #333;
+  --bg-color: #ffffff;
+  --error-color: #EE2D6E;
+  --google-blue: #4285F4;
+  --facebook-blue: #1877F2;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+input, button {
+  font-family: 'Josefin Sans', sans-serif;
+}

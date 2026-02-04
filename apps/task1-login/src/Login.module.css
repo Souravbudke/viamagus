@@ -1,0 +1,422 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    background-color: #fff;
+    font-family: 'Josefin Sans', sans-serif;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.headerStrip {
+    width: 100%;
+    height: 300px;
+    /* Taller to match 1366x768 proportion (~40%) */
+    background-image: url('/assets/rectangle/Rectangle 1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+}
+
+/* .headerBg removed as we use background-image */
+
+.loginCard {
+    width: 90%;
+    max-width: 500px;
+    background: #fff;
+    border-radius: 4px;
+    /* Crisp or slightly rounded? Image looks sharpish */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    padding: 30px 60px 40px 60px;
+    /* Spacious padding */
+    /* Reduced top padding, wider side padding */
+    margin-top: -150px;
+    /* Deep overlap */
+    /* Pull up more */
+    z-index: 10;
+    text-align: center;
+    position: relative;
+}
+
+.logoContainer {
+    margin-bottom: 20px;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+/* Re-checking image 4... "amazon" logo, then a line is VISIBLE in Image 4 ("Login" text is below a line).
+   Yes, there is a horizontal line under the Amazon logo. */
+.logoContainer {
+    margin-bottom: 15px;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.logo {
+    width: 80px;
+}
+
+.title {
+    color: var(--primary-color);
+    font-size: 32px;
+    /* Standardize large title */
+    /* Slightly smaller than 29 to match spacing */
+    font-weight: 500;
+    margin-bottom: 5px;
+    text-align: center;
+    /* Center aligned per Image 4 */
+}
+
+.treeContainer {
+    margin-bottom: 20px;
+    text-align: center;
+    /* Image 4: Tree is on a line? "Tree ... standing on a line".
+       There is a gray line extending from the tree base. */
+    padding-bottom: 0;
+    /* The tree image itself likely has the line or we add it.
+       The `tree.png` usually has a base. If not, I'll add a border bottom.
+       Let's assume the image sits on the line. */
+    position: relative;
+    width: 100%;
+    /* No line below tree per user request */
+}
+
+.treeImage {
+    width: 100%;
+    max-width: 380px;
+    /* Even bigger - filling content area */
+    /* Small centered tree */
+    height: auto;
+    display: inline-block;
+    background: #fff;
+    /* Cover the line behind roots */
+    padding: 0 10px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0px;
+    /* Sit on the line */
+}
+
+.form {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.formGroup {
+    margin-bottom: 1.2rem;
+    /* Tighter spacing */
+    position: relative;
+}
+
+.inputLabel {
+    display: block;
+    color: var(--primary-color);
+    font-size: 16px;
+    /* Slightly smaller for labels */
+    margin-bottom: 5px;
+    font-weight: 500;
+    /* Regular/Medium */
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #E2E8F0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input:focus {
+    border-color: var(--primary-color);
+}
+
+.inputError {
+    border-color: var(--error-color);
+}
+
+.errorIcon {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.errorMessage {
+    color: var(--error-color);
+    font-size: 10px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.errorBlockIcon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    display: block;
+}
+
+.forgotPasswordContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    font-size: 12px;
+}
+
+/* Wait, forgot password is usually right aligned. Or split?
+   Previous code was right aligned. Image 2 shows 'Forgot Password?' on left?
+   No, usually right. Let's keep it simply flex-end or space-between if we add something else.
+   Wait, target image shows "Forgot Password?" centered? No, likely right or left.
+   User image is small. But standard is right.
+   Wait looking at screenshot again (mentally): "Forgot Password?" seems to be on the left or center?
+   Let's check code... text-align: right previously.
+   Let's use space-between and put "New User? Sign Up" on the right in the same line?
+   No, "New User? Sign Up" is bottom red text.
+   Let's stick to Right aligned "Forgot Password?" or typical left under input.
+   Image 1 shows 'Forgot Password?' in pink on right. Correct.
+   Image 1 also shows "New User? Sign Up" in pink on right.
+   Wait, Image 1 (my output) shows them.
+   Target Image 2 shows:
+   Forgot Password? (Black text) -> No, Pink text.
+   New User? Sign Up (Red text) -> Correct.
+   They are on the same line? Or separate?
+   Image 2 seems to have them on same line: "Forgot Password?           New User? Sign Up"
+   Let's try to put them on the same line if possible, or just standard.
+   I will follow the new code structure: Forgot in container, Sign Up separate at bottom. */
+
+.forgotPasswordContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    font-size: 12px;
+}
+
+.forgotPassword {
+    color: #000;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.forgotPassword:hover {
+    text-decoration: underline;
+}
+
+/* User wants "New User? Sign Up" on the same line?
+   Let's adjust layout in JSX if needed.
+   I will use absolute positioning or flex for the bottom links line.
+   Actually, let's put "New User? Sign Up" in the container for now.
+*/
+
+.submitBtn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 30px;
+    /* More rounded */
+    font-size: 14px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 600;
+    text-transform: capitalize;
+    /* "Sign In" vs "SIGN IN"? Image 4 says "Sign In" */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(32, 183, 22, 0.3);
+    transition: transform 0.2s;
+}
+
+.submitBtn:hover {
+    transform: translateY(-2px);
+}
+
+.divider {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 11px;
+    color: #000;
+    font-weight: 600;
+}
+
+.dividerText {
+    padding: 0 10px;
+}
+
+.dividerLine {
+    flex: 1;
+    height: 1px;
+    background-color: #E2E8F0;
+}
+
+.socialLogin {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.socialBtn {
+    width: 100%;
+    height: 40px;
+    /* Fixed height for consistency */
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    /* Reset padding to handle internal easier */
+}
+
+.googleBtn {
+    background-color: #4285F4;
+}
+
+.facebookBtn {
+    background-color: #1877F2;
+}
+
+.socialIconWrapper {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    bottom: 4px;
+    width: 36px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+}
+
+/* If center aligned content, maybe icon should be part of flow?
+   Target Image 2 shows icons on the LEFT in a white box? Or just white icon?
+   Usually "Continue with..." has logo on left.
+   Let's try standard layout: Icon Left, Text Center. */
+
+.socialIconWrapper {
+    /* removing absolute to flow with text if desired, but box design usually distinct */
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    bottom: 4px;
+    width: 36px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+}
+
+/* Wait, simple white tile on left?
+   Let's make it simpler for now. White square with logo. */
+
+.socialIcon {
+    width: 20px;
+    height: 20px;
+}
+
+.authLinks {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    font-size: 10px;
+    /* Small text */
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.forgotPassword {
+    color: #000;
+    text-decoration: none;
+}
+
+.newUserLink {
+    color: #EE2D6E;
+    text-decoration: none;
+}
+
+/* Fix Social Buttons - White Tile Style */
+.socialBtn {
+    width: 100%;
+    height: 48px;
+    /* Taller button */
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    position: relative;
+}
+
+.socialIconContainer {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    margin-left: 4px;
+    /* Space from left edge => Inset look */
+}
+
+.socialImg {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.socialText {
+    flex: 1;
+    text-align: center;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    /* Optical center adjustment since icon is on left */
+    padding-right: 44px;
+}
+
+.googleBtn {
+    background-color: #4285F4;
+}
+
+.facebookBtn {
+    background-color: #1877F2;
+}
+
+.facebookIconText {
+    color: #1877F2;
+    /* Facebook Blue */
+    font-size: 28px;
+    /* Prominent size */
+    font-weight: 900;
+    /* Boldest weight */
+    font-family: sans-serif;
+    line-height: 1;
+    display: inline-block;
+    transform: translateY(2px);
+    /* Vertical adjustment */
+}
