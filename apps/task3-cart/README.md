@@ -1,67 +1,85 @@
 # Task 3: Shopping Cart Application
 
-This project is a fully functional Shopping Cart application built with React. It demonstrates complex state management, real-time calculations, and a premium responsive UI.
+A production-grade, responsive Shopping Cart application built with React. This project focuses on complex state management, real-time recalculations, and a premium "Clean Flat" user interface.
 
-## Features
+## Key Features
 
-### Core Functionality
-- **Product List**: Displays a list of available products with details (Name, Price, Quantity).
-- **Quantity Management**: Users can increase or decrease product quantities using number inputs.
-- **Real-time Totals**: Automatically updates line item totals and the cart subtotal instantly upon interaction.
-- **Remove Items**: Allows users to remove formatted products from the cart.
-- **Add Product**: A feature to restore products to the cart if they were previously removed.
+### 1. Dynamic Cart Management
+- **State Logic**: A central `cartItems` state array drives the entire UI.
+- **Quantity Updates**:
+  - Dynamically recalculates line totals (`Price * Qty`).
+  - Instantly updates the global subtotal.
+  - Validates inputs (prevents negative values or non-integer characters).
+- **Product Restoration**:
+  - **Remove**: Deletes items from the active state.
+  - **Restore**: The "+ Add Product" feature intelligently detects which items from the `productList` are missing and restores them sequentially.
 
-### Discount System
-- **Percentage Discount**: Accepts a numeric value (0-100) to apply a percentage discount to the subtotal.
-- **Validation**: Prevents invalid inputs strings or out-of-range numbers.
-- **Calculation**: Displays the exact discount amount deducted from the total.
+### 2. Financial Calculations
+- **Real-Time Math**:
+  - `Subtotal`: Sum of all line totals.
+  - `Discount`: Precise percentage calculation based on user input (0-100%).
+  - `Grand Total`: Final amount after deductions.
+- **Currency Formatting**: Uses `Intl.NumberFormat` to strictly enforce INR (`₹`) currency standards across the application.
 
-### Data Persistence
-- **Local Storage**: Persists the state of the cart (items and quantities) across browser refreshes, ensuring users do not lose their progress.
+### 3. Data Persistence
+- **LocalStorage Sync**:
+  - Uses a `useEffect` hook to serialize and save `cartItems` to `localStorage` on every change.
+  - Initializes state lazily (`useState(() => ...)`) to prevent hydration mismatches and ensure data survives page reloads.
 
-### UI/UX
-- **Premium Design**: Features a modern, clean interface with card-based layouts, soft shadows, and the Inter typeface.
-- **Responsive Layout**:
-  - **Desktop**: Table-like layout with aligned columns.
-  - **Mobile**: Stacked card layout for each product, ensuring readability on small screens.
-- **Mobile Optimization**: Specific adjustments for mobile inputs, buttons, and summary cards to prevent overflow and ensure touch targets are accessible.
+### 4. Premium UI/UX
+- **Design System**:
+  - **Font**: Inter (Sans-serif) for clean readability.
+  - **Palette**: Slate (`#101828`) for text, Indigo (`#4338ca`) for primary actions, and White/Gray surfaces.
+- **Mobile Optimization**:
+  - **Desktop**: Traditional table layout for high data density.
+  - **Mobile**: Transforms into a card-based "stacked" layout using CSS Grid and Flexbox media queries (`max-width: 768px`).
+  - **Touch Targets**: Enhanced padding on buttons and inputs for easier interaction on touch devices.
 
-## Project Structure
+---
 
-- `src/components/Cart.jsx`: The core component handling all cart logic (state, calculations, rendering).
-- `src/components/Cart.module.css`: formatting styles containing strict grid layouts, media queries, and utility classes.
-- `src/components/Cart.test.jsx`: Comprehensive unit test suite covering rendering, updates, and persistence.
+## Technical Implementation
 
-## Setup and Installation
+### File Structure
+```
+src/components/
+├── Cart.jsx         # Business Logic & View Controller
+├── Cart.module.css  # Scoped Styles (Grid/Flex/Media Queries)
+└── Cart.test.jsx    # Component Integration Tests
+```
 
-1. Navigate to the project directory:
-   ```bash
-   cd apps/task3-cart
-   ```
+### Testing Strategy
+Built with **Vitest** and **React Testing Library** (>90% Coverage).
+- **Rendering**: Verifies all products from `productList` appear initially.
+- **Interaction**: Simulates exact user clicks on "Remove" and "Add Product".
+- **Logic**: asserts that `50 * 2 = 100` and `Total - Discount = Final`.
+- **Persistence**: Mounts/Unmounts the component to verify `localStorage` rehydration.
 
-2. Install dependencies:
+---
+
+## Setup & Commands
+
+1. **Install Dependencies**:
    ```bash
    npm install
    ```
 
-3. Run the development server:
+2. **Run Dev Server**:
    ```bash
    npm run dev
    ```
 
-4. Run Unit Tests:
+3. **Execute Test Suite**:
    ```bash
    npm test
    ```
 
-5. Build for production:
+4. **Production Build**:
    ```bash
    npm run build
    ```
 
-## Technologies Used
-- React
-- Vite
-- Vitest (Testing)
-- CSS Modules
-- LocalStorage API
+## Tech Stack
+- **React 19**: Core framework.
+- **Vite**: Build pipeline.
+- **CSS Modules**: For style encapsulation and theming.
+- **Vitest**: For unit and integration testing.

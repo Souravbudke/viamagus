@@ -2,7 +2,7 @@
 
 A robust, "Brutalist" styled React application for browsing and creating posts. This project demonstrates modern React patterns including Context API for state management, client-side caching, and responsive CSS modules.
 
-## 🚀 Features
+## Features
 
 ### 1. Smart Data Management
 - **Context API Store**: Centralized state management using `PostsContext`.
@@ -33,7 +33,7 @@ A robust, "Brutalist" styled React application for browsing and creating posts. 
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### Folder Structure
 ```
@@ -52,7 +52,7 @@ src/
 
 ---
 
-## 📡 API Integration
+## API Integration
 
 Powered by **JSONPlaceholder API**:
 - **Get Posts**: `GET /posts?_start={index}&_limit=10`
@@ -61,7 +61,7 @@ Powered by **JSONPlaceholder API**:
 
 ---
 
-## 🛠️ Setup & Installation
+## Setup & Installation
 
 1. **Navigate to directory**:
    ```bash
@@ -83,7 +83,7 @@ Powered by **JSONPlaceholder API**:
    npm run build
    ```
 
-## 📦 Technologies
+## Technologies
 - **React 19**: Functional components & Hooks.
 - **React Router 7**: Client-side routing.
 - **Vite**: Ultra-fast build tool.
