@@ -40,3 +40,7 @@ yarn-error.log*
 # Agent
 .agent
 .gemini
+
+# Submission Artifacts
+*.zip
+create_submission_zip.sh
