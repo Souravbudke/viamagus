@@ -33,6 +33,7 @@ This is a NestJS-based REST API for managing Teams and Tasks, integrated with Mo
    Create a `.env` file in the `apps/backend-task` directory:
    ```env
    MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/db_name
+   JWT_SECRET=yourSuperSecretKey
    ```
 
 ## Running the Application
