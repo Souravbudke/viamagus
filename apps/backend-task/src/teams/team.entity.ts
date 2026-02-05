@@ -1,15 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
-import { User } from '../users/user.entity';
+import { Entity, Column, ObjectIdColumn, ObjectId } from 'typeorm';
 
 @Entity()
 export class Team {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @ObjectIdColumn()
+    _id: ObjectId;
 
     @Column()
     name: string;
 
-    @ManyToMany(() => User)
-    @JoinTable()
-    members: User[];
+    @Column()
+    memberIds: string[]; // Store ObjectIds as strings for simplicity in JSON
 }

@@ -1,17 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Task } from '../tasks/task.entity';
+import { Entity, Column, ObjectIdColumn, ObjectId } from 'typeorm';
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @ObjectIdColumn()
+    _id: ObjectId;
 
     @Column({ unique: true })
     username: string;
 
-    @Column({ select: false }) // Hide password by default
+    @Column({ select: false })
     password: string;
 
-    @OneToMany(() => Task, (task) => task.assignee)
-    tasks: Task[];
+    // We can store teamId if we want bidirectional
+    @Column()
+    teamId: string; // Store as string for easier handling or ObjectId
 }

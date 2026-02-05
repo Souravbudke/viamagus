@@ -14,11 +14,11 @@ export class TasksController {
 
     @Get()
     findAll(@Query('assignee') assignee: string) {
-        return this.tasksService.findAll(assignee ? +assignee : undefined);
+        return this.tasksService.findAll(assignee);
     }
 
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateTaskDto: any) {
-        return this.tasksService.update(+id, updateTaskDto);
+        return this.tasksService.update(id, updateTaskDto);
     }
 }

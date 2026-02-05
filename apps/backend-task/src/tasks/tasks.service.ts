@@ -12,25 +12,30 @@ export class TasksService {
     ) { }
 
     async create(createTaskDto: any, user: User): Promise<Task> {
-        const task = this.tasksRepository.create(createTaskDto as Partial<Task>); // Cast to Partial<Task> to ensure single object
+        const task = this.tasksRepository.create(createTaskDto as Partial<Task>);
+        // Automatically assign to the creator or specified assignee?
+        // Requirement: "Ability to assign a task to a team member" usually implies logic.
+        // For creation, let's assume if assigneeId is passed, use it, else assign to creator (optional).
         if (createTaskDto.assigneeId) {
-            task.assignee = { id: createTaskDto.assigneeId } as User;
+            task.assigneeId = createTaskDto.assigneeId;
+        } else if (user && user._id) {
+            task.assigneeId = user._id.toString();
         }
         return this.tasksRepository.save(task);
     }
 
-    async findAll(assigneeId?: number): Promise<Task[]> {
+    async findAll(assigneeId?: string): Promise<Task[]> {
         if (assigneeId) {
             return this.tasksRepository.find({
-                where: { assignee: { id: assigneeId } },
-                relations: ['assignee']
+                where: { assigneeId: assigneeId }
             });
         }
-        return this.tasksRepository.find({ relations: ['assignee'] });
+        return this.tasksRepository.find();
     }
 
-    async update(id: number, updateTaskDto: any): Promise<Task | null> {
-        await this.tasksRepository.update(id, updateTaskDto);
-        return this.tasksRepository.findOne({ where: { id }, relations: ['assignee'] });
+    async update(id: string, updateTaskDto: any): Promise<Task | null> {
+        const { ObjectId } = require('mongodb');
+        await this.tasksRepository.update({ _id: new ObjectId(id) }, updateTaskDto);
+        return this.tasksRepository.findOne({ where: { _id: new ObjectId(id) } });
     }
 }

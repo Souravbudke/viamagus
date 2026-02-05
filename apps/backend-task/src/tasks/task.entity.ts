@@ -1,20 +1,19 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { User } from '../users/user.entity';
+import { Entity, Column, ObjectIdColumn, ObjectId } from 'typeorm';
 
 @Entity()
 export class Task {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @ObjectIdColumn()
+    _id: ObjectId;
 
     @Column()
     description: string;
 
     @Column()
-    due_date: string; // ISO Date string
+    due_date: string;
 
     @Column()
-    status: string; // OPEN, IN_PROGRESS, DONE
+    status: string;
 
-    @ManyToOne(() => User, (user) => user.tasks)
-    assignee: User;
+    @Column()
+    assigneeId: string; // Reference to User._id
 }

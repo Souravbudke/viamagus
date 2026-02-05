@@ -16,17 +16,20 @@ export class TeamsService {
         return this.teamsRepository.save(team);
     }
 
-    async addMember(teamId: number, userId: number): Promise<Team | null> {
-        const team = await this.teamsRepository.findOne({ where: { id: teamId }, relations: ['members'] });
-        // In a real app, you'd check if team exists and fetch user properly.
-        // For this assignment valid ids are assumed or error handling skipped for brevity.
-        // We need to inject UsersService or Just use a partial User object if relation cascade handles it? 
-        // TypeORM usually needs the entity. 
-        // Ideally we should use UsersService, but let's assume we pass the user object logic or just save relation.
-        // Simplified:
+    async addMember(teamId: string, userId: string): Promise<Team | null> {
+        const { ObjectId } = require('mongodb');
+        const team = await this.teamsRepository.findOne({ where: { _id: new ObjectId(teamId) } });
+
         if (team) {
-            team.members.push({ id: userId } as User);
-            return this.teamsRepository.save(team);
+            if (!team.memberIds) {
+                team.memberIds = [];
+            }
+            // Avoid duplicates
+            if (!team.memberIds.includes(userId)) {
+                team.memberIds.push(userId);
+                return this.teamsRepository.save(team);
+            }
+            return team;
         }
         return null;
     }

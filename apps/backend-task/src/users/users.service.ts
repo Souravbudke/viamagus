@@ -13,7 +13,7 @@ export class UsersService {
     async findOne(username: string): Promise<User | null> {
         return this.usersRepository.findOne({
             where: { username },
-            select: ['id', 'username', 'password'] // Explicitly select password for auth
+            select: ['_id', 'username', 'password'] // Explicitly select password for auth
         });
     }
 
@@ -22,8 +22,10 @@ export class UsersService {
         return this.usersRepository.save(newUser);
     }
 
-    async findById(id: number): Promise<User | null> {
-        return this.usersRepository.findOne({ where: { id } });
+    async findById(id: string): Promise<User | null> {
+        // TypeORM Mongo driver can sometimes handle string IDs if they are valid ObjectIds
+        const { ObjectId } = require('mongodb');
+        return this.usersRepository.findOne({ where: { _id: new ObjectId(id) } });
     }
 
     async findAll(): Promise<User[]> {

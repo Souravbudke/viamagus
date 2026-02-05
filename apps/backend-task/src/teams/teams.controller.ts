@@ -13,8 +13,8 @@ export class TeamsController {
     }
 
     @Post(':id/members')
-    addMember(@Param('id') id: string, @Body() body: { userId: number }) {
-        return this.teamsService.addMember(+id, body.userId);
+    addMember(@Param('id') id: string, @Body() body: { userId: string }) {
+        return this.teamsService.addMember(id, body.userId);
     }
 
     @Get()

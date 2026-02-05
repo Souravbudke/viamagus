@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TasksModule } from './tasks/tasks.module';
 import { TeamsModule } from './teams/teams.module';
 import { AuthModule } from './auth/auth.module';
@@ -12,11 +13,18 @@ import { User } from './users/user.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'database.sqlite',
-      entities: [Task, Team, User],
-      synchronize: true, // Auto-create tables (Dev only)
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        type: 'mongodb',
+        url: configService.get<string>('MONGODB_URI'),
+        entities: [Task, Team, User],
+        synchronize: true, // Auto-create collections
+      }),
+      inject: [ConfigService],
     }),
     AuthModule,
     UsersModule,
